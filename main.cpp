@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Solutions/347.hpp"
+#include "Solutions/567.hpp"
 using namespace std;
 int main(int, char**) {
     test();

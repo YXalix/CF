@@ -13,6 +13,9 @@
 #include <stack>
 #include <list>
 #include <sstream>
+#include <numeric>
+#include <sys/_types/_key_t.h>
+#include <utility>
 
 using namespace std;
 
