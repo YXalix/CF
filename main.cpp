@@ -1,7 +1,5 @@
-#include <iostream>
-#include "Solutions/567.hpp"
-using namespace std;
-int main(int, char**) {
-    test();
-    return 0;
+#include <283.移动零.cpp>
+
+int main(){
+	test();
 }

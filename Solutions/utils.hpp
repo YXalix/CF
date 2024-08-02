@@ -53,6 +53,29 @@ struct TreeNode {
     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
 
+template <typename a>
+inline void printVector(const vector<a> &vec) {
+    for (auto &iter : vec) {
+        cout << iter << " ";
+    }
+    cout<<endl;
+}
+
+template <typename a>
+inline void printHashSet(const unordered_set<a> &vec) {
+    for (auto &iter : vec) {
+        cout << iter << " ";
+    }
+    cout<<endl;
+}
+
+template <typename a, typename b>
+inline void printHashMap(const unordered_map<a,b> &m) {
+    for (auto &iter : m) {
+        cout << "{" <<iter.first << ", "<<iter.second<<"} ";
+    }
+    cout<<endl;
+}
 
 inline void printIntVector(const vector<int> &vec) {
     for (auto &iter : vec) {

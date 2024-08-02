@@ -9,4 +9,5 @@ _multiconfig.yml
 .vscode/
 build/
 .cache/
+main.cpp
 
