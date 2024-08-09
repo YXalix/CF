@@ -42,6 +42,14 @@ inline ListNode *create_list(vector<int> &nums) {
     return head;
 }
 
+inline void printList(ListNode *head) {
+    while (head) {
+        cout << head->val << "->";
+        head = head->next;
+    }
+    cout << endl;
+}
+
 // Definition for a binary tree node.
 struct TreeNode {
     int val;
