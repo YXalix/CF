@@ -5,20 +5,43 @@
 #define LEETCODEPROJECTCPP_UTILS_H
 
 #include <iostream>
+#include <string>
 #include <vector>
 #include <algorithm>
 #include <unordered_map>
 #include <unordered_set>
 #include <queue>
-#include <stack>
-#include <list>
 #include <sstream>
-#include <numeric>
 #include <sys/_types/_key_t.h>
-#include <utility>
 
 using namespace std;
 
+class Node {
+public:
+    int val;
+    Node* next;
+    Node* random;
+
+    Node(): val(0), next(nullptr), random(nullptr) {}
+
+    Node(int _val, Node* _next) {
+        val = _val;
+        next = _next;
+        random = NULL;
+    }
+
+    Node(int _val, Node* _next, Node* _random) {
+        val = _val;
+        next = _next;
+        random = _random;
+    }
+    
+    Node(int _val) {
+        val = _val;
+        next = NULL;
+        random = NULL;
+    }
+};
 
 //Definition for singly-linked list.
 struct ListNode {
@@ -30,6 +53,19 @@ struct ListNode {
 };
 
 inline ListNode *create_list(vector<int> &nums) {
+    if (nums.empty()) {
+        return nullptr;
+    }
+    auto head = new ListNode(nums[0]);
+    auto cur = head;
+    for (int i = 1; i < nums.size(); ++i) {
+        cur->next = new ListNode(nums[i]);
+        cur = cur->next;
+    }
+    return head;
+}
+
+inline ListNode *create_list(vector<int> nums) {
     if (nums.empty()) {
         return nullptr;
     }
@@ -60,6 +96,69 @@ struct TreeNode {
     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
+
+inline bool stoi_valid(int& num, string& s) {
+    if (s == "null") return false;
+    num = stoi(s);
+    return true;
+}
+
+// create tree by bfs
+inline TreeNode *buildTree(vector<string> &nums) {
+    if (nums.empty()) return nullptr;
+    int val;
+    int cur = 0;
+    if (!stoi_valid(val, nums[cur])) return nullptr;
+    cur++;
+    TreeNode* root = new TreeNode(val);
+    queue<TreeNode*> q;
+    q.push(root);
+    TreeNode* p;
+    while (!q.empty() && cur < nums.size()) {
+        p = q.front();
+        q.pop();
+        // left
+        if (!stoi_valid(val, nums[cur])) p->left = nullptr;
+        else {
+            p->left = new TreeNode(val);
+            q.push(p->left);
+        }
+        cur++;
+        // right
+        if (!stoi_valid(val, nums[cur])) p->right = nullptr;
+        else {
+            p->right = new TreeNode(val);
+            q.push(p->right);
+        }
+        cur++;
+    }
+    return root;
+}
+
+// print tree by bfs
+inline void printTree(TreeNode *root) {
+    if (root == nullptr) {
+        return;
+    }
+    queue<TreeNode *> q;
+    q.push(root);
+    while (!q.empty()) {
+        int size = q.size();
+        for (int i = 0; i < size; ++i) {
+            TreeNode *node = q.front();
+            q.pop();
+            if (node == nullptr) {
+                cout << "null ";
+                continue;
+            }
+            cout << node->val << " ";
+            q.push(node->left);
+            q.push(node->right);
+        }
+        cout<< endl;
+    }
+    cout << endl;
+}
 
 template <typename a>
 inline void printVector(const vector<a> &vec) {
